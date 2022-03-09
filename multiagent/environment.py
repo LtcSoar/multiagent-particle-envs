@@ -210,7 +210,7 @@ class MultiAgentEnv(gym.Env):
                     else:
                         word = alphabet[np.argmax(other.state.c)]
                     message += (other.name + ' to ' + agent.name + ': ' + word + '   ')
-            print(message)
+            # print(message)
 
         for i in range(len(self.viewers)):
             # create viewers (if necessary)
@@ -233,7 +233,7 @@ class MultiAgentEnv(gym.Env):
                 if 'agent' in entity.name:
                     geom.set_color(*entity.color, alpha=0.5)
                 else:
-                    geom.set_color(*entity.color)
+                    geom.set_color(*entity.color, alpha=0.7)
                 geom.add_attr(xform)
                 self.render_geoms.append(geom)
                 self.render_geoms_xform.append(xform)
@@ -281,6 +281,12 @@ class MultiAgentEnv(gym.Env):
                 for y in np.linspace(-range_max, +range_max, 5):
                     dx.append(np.array([x,y]))
         return dx
+    
+    def adversaries(self):
+        return [agent for agent in self.world.agents if agent.adversary]
+
+    def good_agents(self):
+        return [agent for agent in self.world.agents if not agent.adversary]
 
 
 # vectorized wrapper for a batch of multi-agent environments

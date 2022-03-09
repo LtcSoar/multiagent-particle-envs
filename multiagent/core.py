@@ -59,6 +59,8 @@ class Landmark(Entity):
 class Agent(Entity):
     def __init__(self):
         super(Agent, self).__init__()
+        # agents are alive by default
+        self.dead = False
         # agents are movable by default
         self.movable = True
         # cannot send communication signals
