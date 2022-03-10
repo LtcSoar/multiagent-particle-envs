@@ -1,4 +1,3 @@
-from asyncio import FastChildWatcher
 import numpy as np
 from multiagent.core import World, Agent, Landmark,Entity
 from multiagent.scenario import BaseScenario
@@ -106,7 +105,7 @@ class Scenario(BaseScenario):
     def reset_world(self, world):
         # random properties for agents
         for i, agent in enumerate(world.agents):
-            agent :Agent
+            agent : Agent
             agent.color = np.array([0.45, 0.95, 0.45]) if not agent.adversary else np.array([0.95, 0.45, 0.45])
             agent.color -= np.array([0.4, 0.4, 0.4]) if agent.leader else np.array([0, 0, 0])
             agent.accel = 4.0 if agent.adversary else 3.0
@@ -272,8 +271,8 @@ class Scenario(BaseScenario):
         #             rew -= 100
         #             break
         # 注意顺序是：从good agent到adv，obs和reward依次给出
-        if world.food_flag:
-            rew -= 100
+        # if world.food_flag:
+        #     rew -= 100
         return rew
 
 
